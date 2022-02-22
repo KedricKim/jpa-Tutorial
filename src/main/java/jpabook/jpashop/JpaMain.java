@@ -1,5 +1,10 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.OrderStatus;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -16,6 +21,15 @@ public class JpaMain {
         tx.begin();
 
         try{
+            Member member = new Member();
+            member.setName("ked");
+            em.persist(member);
+
+            Order order = new Order();
+            order.setStatus(OrderStatus.ORDER);
+            order.setMember(member);
+            em.persist(order);
+
             tx.commit();
         }catch(Exception e){
             tx.rollback();
